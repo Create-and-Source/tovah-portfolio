@@ -9,7 +9,7 @@ const experience = [
     company: 'Brands By Status LLC / Create & Source',
     period: '2025 - Present',
     points: [
-      'Led product vision, roadmap, and development of 46+ repositories and 27 live production applications, shipping daily using Claude Code as my primary development tool',
+      'Led product vision, roadmap, and development of 46+ repositories and 27 production applications, shipping daily using Claude Code as my primary development tool',
       'Built Sebastian AI (v2), an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
       'Shipped MerchOS, an AI-powered merchandise sourcing platform integrating 8 APIs (Stripe Connect, Gmail, SAGE, OpenAI, Printify, Alibaba, SSActivewear, Fulfill Engine)',
       'Built 4 Chrome extensions using Manifest V3 including side panels, background workers, and content scripts',
@@ -174,13 +174,13 @@ export default function App() {
           <p className="hero-p">
             In April 2023, I designed and operated an autonomous AI sales agent named Sebastian on the Go High Level CRM,
             six weeks before OpenAI shipped function calling, ten days before the platform shipped a competing native AI product.
-            Today I operate Brands By Status LLC (Create & Source) with 46+ repositories, 27 live production applications,
+            Today I operate Brands By Status LLC (Create & Source) with 46+ repositories, 27 production applications,
             and 4 Chrome Manifest V3 extensions for real clients including a Fortune 500 (Nutanix), the International Dark-Sky
             Discovery Center, and 7+ independent businesses.
           </p>
           <div className="hero-nums">
             <div className="num-block"><span className="num">46+</span><span className="num-label">Repositories</span></div>
-            <div className="num-block"><span className="num">27</span><span className="num-label">Live Applications</span></div>
+            <div className="num-block"><span className="num">27</span><span className="num-label">Applications</span></div>
             <div className="num-block"><span className="num">4</span><span className="num-label">Chrome Extensions</span></div>
             <div className="num-block"><span className="num">8+</span><span className="num-label">API Integrations</span></div>
           </div>
@@ -229,6 +229,43 @@ export default function App() {
               <div className="edu-item">
                 <span className="edu-degree">BS Psychology</span>
                 <span className="edu-school">University of Arizona, 2014</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ── ORIGIN STORY ── */}
+      <section className="sect" id="origin">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">Origin Story: Sebastian v1, April 2023</span>
+          <div className="origin-content">
+            <div className="origin-text">
+              <p className="origin-lead">
+                Before I built Sebastian, I had to understand the platform. I printed every Go High Level workflow
+                on individual sheets of paper and connected them with colored yarn across my office wall. Different
+                colors for text triggers, email cascades, and call dispositions. The whole automated outreach engine,
+                mapped physically, so I could see where it was working and where leads were falling through.
+              </p>
+              <p className="origin-body">
+                Then I built the agent. Sebastian ran 8,983 real conversations across SMS and web chat, qualifying
+                leads, scheduling calls across time zones, retrieving policy data, and maintaining persona consistency.
+                No framework existed for this. I designed a hybrid architecture: deterministic keyword-triggered
+                workflows for predictable paths, AI for ambiguous ones, with hallucination guardrails I built myself.
+              </p>
+              <p className="origin-body">
+                Six weeks before OpenAI shipped function calling. Ten days before Go High Level shipped Eliza,
+                their own native AI agent platform. I was building agentic systems before the category had a name.
+              </p>
+            </div>
+            <div className="origin-photos">
+              <div className="origin-photo-wrap">
+                <img src="/images/the-wall.png" alt="Physical workflow map with papers connected by colored yarn" className="origin-photo" />
+                <span className="origin-caption">The wall: every Go High Level workflow, mapped physically. April 2023.</span>
+              </div>
+              <div className="origin-photo-wrap">
+                <img src="/images/coded-a-robot.png" alt="Instagram story: Do you hate cold calling? I coded a robot." className="origin-photo origin-photo-sm" />
+                <span className="origin-caption">"Do you hate cold calling and follow up? I coded a robot." April 26, 2023.</span>
               </div>
             </div>
           </div>

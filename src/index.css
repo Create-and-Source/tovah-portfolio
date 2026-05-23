@@ -164,6 +164,51 @@ ul { list-style: none; }
   max-width: 560px;
 }
 
+/* ═══ ORIGIN STORY ═══ */
+.origin-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.origin-lead {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  font-weight: 400;
+  max-width: 720px;
+}
+.origin-body {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-2);
+  max-width: 720px;
+  margin-top: 16px;
+}
+.origin-photos {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.origin-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.origin-photo {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.origin-photo-sm {
+  max-width: 320px;
+}
+.origin-caption {
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.5;
+}
+
 /* ═══ HOW I WORK ═══ */
 .approach-grid {
   display: grid;
@@ -516,6 +561,8 @@ ul { list-style: none; }
   .feat-list { grid-template-columns: 1fr; }
   .ext-list { grid-template-columns: 1fr; }
   .approach-grid { grid-template-columns: 1fr; }
+  .origin-photos { grid-template-columns: 1fr; }
+  .origin-photo-sm { max-width: 100%; }
   .skill-row { grid-template-columns: 1fr; gap: 4px; }
 }
 
