@@ -42,7 +42,7 @@ const experience = [
     company: 'Self-Employed',
     period: '2020 - 2022',
     points: [
-      '72 homes sold with 20+ in the first year, 500% above industry average',
+      '20+ homes sold in the first year, 500% above industry average',
       'Trained and mentored new sales consultants',
     ],
   },
