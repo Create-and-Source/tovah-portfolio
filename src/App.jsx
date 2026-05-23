@@ -9,13 +9,13 @@ const experience = [
     company: 'Brands By Status LLC / Create & Source',
     period: '2025 - Present',
     points: [
-      'Designed, built, and shipped 46+ repositories and 27 live production applications using Claude Code as my primary development tool',
+      'Led product vision, roadmap, and development of 46+ repositories and 27 live production applications, shipping daily using Claude Code as my primary development tool',
       'Built Sebastian AI, an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
       'Shipped MerchOS, an AI-powered merchandise sourcing platform integrating 8 APIs (Stripe Connect, Gmail, SAGE, OpenAI, Printify, Alibaba, SSActivewear, Fulfill Engine)',
       'Built 4 Chrome extensions using Manifest V3 including side panels, background workers, and content scripts',
-      'Conducted product discovery with real clients including a museum (IDSDC/Dark Sky), Fortune 500 (Nutanix), and 7+ independent businesses',
+      'Conducted user research and product discovery with real clients including a museum (IDSDC/Dark Sky), Fortune 500 (Nutanix), and 7+ independent businesses, translating feedback into prioritized feature roadmaps',
       'Wrote product specifications, competitive analyses, design systems, and phased build roadmaps for every major project',
-      'Managed a GitHub organization with 46+ repositories and automated CI/CD deployments via Vercel',
+      'Managed a GitHub organization with 46+ repositories, PR workflows, branching strategies, and automated CI/CD deployments via Vercel',
     ],
   },
   {
@@ -52,42 +52,42 @@ const featuredProjects = [
   {
     name: 'Sebastian AI',
     type: 'Agentic AI + Chrome Extension',
-    desc: 'An AI concierge that learns any business through observation. Chrome extension with 5 tab workers feeds context to a web app that builds itself around your operations. Progressive knowledge building, self-healing database creation.',
-    tech: 'Claude API, Chrome Manifest V3, React, Supabase',
+    desc: 'An AI concierge that learns any business through observation. A Chrome extension with 5 tab workers feeds context into a web app that builds itself around your operations. Progressive knowledge building, self-healing database creation, and agentic task execution.',
+    tech: 'Claude API, Chrome Manifest V3, React, Supabase, MCP-ready architecture',
     github: 'Create-and-Source/sebastian-extension',
   },
   {
     name: 'MerchOS',
     type: 'AI SaaS Platform',
-    desc: 'AI-powered merchandise sourcing platform where AI handles client communication, product sourcing, quoting, invoicing, and supplier management. 8 API integrations working as one system.',
+    desc: 'AI-powered merchandise sourcing platform where AI handles client communication, product sourcing, quoting, invoicing, and supplier management. 8 API integrations working as one system. Built to replace manual distributor workflows with agentic automation.',
     tech: 'React, TypeScript, Supabase, Stripe Connect, Gmail API, SAGE, OpenAI, Printify',
     github: 'Create-and-Source/merchos',
   },
   {
     name: 'Dark Sky Admin',
     type: 'Client Operations Platform',
-    desc: 'Museum operations system for the International Dark-Sky Discovery Center. Inventory management (56+ items), Square POS integration with webhooks, ticketing, gift shop, staff management, AI-powered analytics.',
+    desc: 'Museum operations system for the International Dark-Sky Discovery Center. Inventory management (56+ items), Square POS integration with webhooks, ticketing, gift shop, staff management, and AI-powered analytics. Built from user research with museum staff.',
     tech: 'React, Supabase, Square API, AWS Lambda, DynamoDB, Webhooks',
     github: 'Create-and-Source/DarkSky_client',
   },
   {
     name: 'Nutanix Corporate Store',
     type: 'Enterprise E-Commerce',
-    desc: 'Employee merchandise store for Fortune 500 tech company. Request/approval workflows, fulfillment tracking, admin management panel.',
+    desc: 'Employee merchandise store for a Fortune 500 tech company. Request/approval workflows, fulfillment tracking, and admin management panel. Designed from discovery interviews with their marketing team.',
     tech: 'React, Supabase, Admin Dashboard',
     github: 'Create-and-Source/nutanix-store',
   },
   {
     name: 'CS Platform',
     type: 'Business Operations Dashboard',
-    desc: 'Internal ops tool processing $52K+ in real Stripe transactions. Gmail inbox integration, SAGE product search, supplier management.',
+    desc: 'Internal ops tool processing $52K+ in real Stripe transactions. Gmail inbox integration, SAGE product search, and supplier management. The prototype that validated the MerchOS product concept.',
     tech: 'React, TypeScript, Stripe, Gmail API, SAGE API, Supabase',
     github: 'Create-and-Source/cs-platform',
   },
   {
     name: 'Olive',
     type: 'AI Companion App',
-    desc: 'Personal AI with conversational chat, journal, task management, Gmail and GitHub integration, text-to-speech.',
+    desc: 'Personal AI with conversational chat, journal, task management, Gmail and GitHub integration, and text-to-speech. An experiment in how AI agents can integrate across developer and personal tools.',
     tech: 'React, Claude API, TTS, Gmail API, GitHub API, Supabase',
     github: 'Create-and-Source/olive-app',
   },
@@ -125,12 +125,12 @@ const extensions = [
 ]
 
 const skills = [
-  { cat: 'AI Development', items: 'Claude Code (daily), Claude API, OpenAI API, AI-assisted workflows' },
+  { cat: 'AI & Agentic Tools', items: 'Claude Code (daily driver), Claude API, OpenAI API, MCP protocol, AI-assisted development workflows, prompt engineering' },
   { cat: 'Frontend', items: 'React, Vite, Next.js, TypeScript, JavaScript, Astro, Framer Motion' },
   { cat: 'Backend & Data', items: 'Supabase (Postgres, Auth, Storage, Realtime), AWS Lambda, DynamoDB, API Gateway' },
   { cat: 'APIs & Integrations', items: 'Stripe, Square, Gmail, SAGE, Printify, Alibaba, SSActivewear, Fulfill Engine, Resend' },
-  { cat: 'Browser Extensions', items: 'Chrome Manifest V3, side panels, background workers, content scripts' },
-  { cat: 'Infrastructure', items: 'Vercel (CI/CD), GitHub Organizations, custom domains, automated deployments' },
+  { cat: 'Browser & IDE Extensions', items: 'Chrome Manifest V3, side panels, background workers, content scripts, VS Code extension architecture' },
+  { cat: 'Developer Workflow', items: 'Git (branching, PRs, merge strategies), GitHub Organizations, Vercel CI/CD, CLI tooling, automated deployments' },
 ]
 
 const fade = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 } }
@@ -158,12 +158,12 @@ export default function App() {
       <section className="hero">
         <motion.div className="hero-inner" {...fade}>
           <h1 className="hero-h1">
-            I design products, build them<br />with AI, and ship them.
+            I build products with AI tools<br />and ship them to real users.
           </h1>
           <p className="hero-p">
-            Product builder based in Scottsdale, AZ. I use Claude Code every day to design, develop, and deploy production applications.
-            Over the past year I've shipped 46+ repositories, 27 live apps, 4 Chrome extensions, and integrated 8+ external APIs,
-            all for real clients and real users.
+            Product-minded builder based in Scottsdale, AZ. I use Claude Code every day to prototype, develop, and deploy production applications.
+            I care about developer workflows, user feedback loops, and what it actually feels like to use the tools I build.
+            Over the past year: 46+ repositories, 27 live apps, 4 Chrome extensions, and 8+ API integrations.
           </p>
           <div className="hero-nums">
             <div className="num-block"><span className="num">46+</span><span className="num-label">Repositories</span></div>
@@ -185,21 +185,26 @@ export default function App() {
           <div className="about-content">
             <div className="about-text">
               <p>
-                I'm a product builder who lives at the intersection of design, technology, and business.
+                I'm a product builder who sits at the intersection of users, technology, and product decisions.
                 My background is unconventional (psychology degrees, real estate, insurance sales) but
                 every role taught me the same thing: understand what people need, then build the system that delivers it.
               </p>
               <p>
-                I discovered AI-assisted development in 2025 and haven't stopped shipping since.
-                Claude Code is my daily driver. I use it to go from idea to deployed product in hours,
-                not weeks. I think in products, not just features, and I care deeply about the
-                experience of the people using what I build.
+                Claude Code is my daily driver. I use it to go from idea to working prototype in hours,
+                not weeks. I have strong opinions about AI coding tools because I use them all day, every day,
+                to build real products for real people. I understand what works, what breaks, and what's missing
+                because I live inside these workflows.
               </p>
               <p>
-                I've built AI agents that learn business operations, SaaS platforms that integrate
-                8 APIs, Chrome extensions that observe and automate, and e-commerce stores for clients
-                ranging from independent creators to Fortune 500 companies. Everything I build ships
-                to production with real users.
+                I've built agentic AI systems that learn business context, SaaS platforms with 8 API integrations,
+                Chrome extensions with side panels and background workers, and e-commerce stores for clients
+                ranging from independent creators to Fortune 500 companies. I prototype fast, run user research
+                with real clients, and ship everything to production.
+              </p>
+              <p>
+                I think in products, not just features. I write specs, competitive analyses, and roadmaps before
+                I build. I conduct discovery interviews to understand what users actually need. And I'm genuinely
+                excited about the space where AI agents, developer tools, and human workflows intersect.
               </p>
             </div>
             <div className="about-edu">
@@ -212,6 +217,47 @@ export default function App() {
                 <span className="edu-degree">BS Psychology</span>
                 <span className="edu-school">University of Arizona, 2014</span>
               </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ── HOW I WORK ── */}
+      <section className="sect" id="approach">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">How I Work</span>
+          <div className="approach-grid">
+            <div className="approach-card">
+              <h3 className="approach-title">Prototype with AI tools daily</h3>
+              <p className="approach-desc">
+                Claude Code is my primary development tool. I use it to rapidly prototype ideas, test API integrations,
+                and validate product concepts before committing to full builds. When the fastest way to answer a question
+                is to build something, I build it.
+              </p>
+            </div>
+            <div className="approach-card">
+              <h3 className="approach-title">Own the feedback loop</h3>
+              <p className="approach-desc">
+                Every product I've built started with user research. I run discovery calls with clients, observe how they
+                use what I build, collect feedback from real users in production, and translate it into prioritized
+                roadmaps. I don't guess what users want.
+              </p>
+            </div>
+            <div className="approach-card">
+              <h3 className="approach-title">Ship across the full stack</h3>
+              <p className="approach-desc">
+                I've built Chrome extensions, API integrations, webhook pipelines, CI/CD workflows, and full applications.
+                I can read API documentation, reason about protocol-level concepts, and hold technical conversations with
+                engineers about architecture decisions.
+              </p>
+            </div>
+            <div className="approach-card">
+              <h3 className="approach-title">Think in developer workflows</h3>
+              <p className="approach-desc">
+                I manage 46+ Git repos with branching strategies, PR workflows, and automated deployments.
+                I understand how developers move code through pipelines because I do it every day. I know where
+                tooling helps and where it gets in the way.
+              </p>
             </div>
           </div>
         </motion.div>

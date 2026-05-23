@@ -164,6 +164,32 @@ ul { list-style: none; }
   max-width: 560px;
 }
 
+/* ═══ HOW I WORK ═══ */
+.approach-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.approach-card {
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.2s;
+}
+.approach-card:hover { border-color: var(--border-h); }
+.approach-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.approach-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
 /* ═══ ABOUT ═══ */
 .about-content {
   display: grid;
@@ -480,6 +506,7 @@ ul { list-style: none; }
   .about-content { grid-template-columns: 1fr; gap: 32px; }
   .feat-list { grid-template-columns: 1fr; }
   .ext-list { grid-template-columns: 1fr; }
+  .approach-grid { grid-template-columns: 1fr; }
   .skill-row { grid-template-columns: 1fr; gap: 4px; }
 }
 
