@@ -9,7 +9,7 @@ const experience = [
     company: 'Brands By Status LLC / Create & Source',
     period: '2025 - Present',
     points: [
-      'Led product vision, roadmap, and development of 46+ repositories and 27 production applications, shipping daily using Claude Code as my primary development tool',
+      'Led product vision, roadmap, and development of 46+ repositories and 27 projects across client work, internal tools, and experiments, shipping daily using Claude Code as my primary development tool. Three platforms in active client use: Dark Sky/IDSDC museum operations, Nutanix corporate store, and MerchOS.',
       'Built Sebastian AI (v2), an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
       'Shipped MerchOS, an AI-powered merchandise sourcing platform integrating 8 APIs (Stripe Connect, Gmail, SAGE, OpenAI, Printify, Alibaba, SSActivewear, Fulfill Engine)',
       'Built 4 Chrome extensions using Manifest V3 including side panels, background workers, and content scripts',
@@ -61,7 +61,7 @@ const featuredProjects = [
   {
     name: 'Sebastian AI (v2)',
     type: 'Agentic AI + Chrome Extension',
-    desc: 'The evolution of the 2023 agent. An AI concierge that learns any business through observation. A Chrome extension with 5 tab workers feeds context into a web app that builds itself around your operations. Progressive knowledge building, self-healing database creation, and agentic task execution.',
+    desc: 'The evolution of the 2023 agent. An AI concierge designed to learn any business through observation. Chrome extension with 5 tab workers feeds context into a web app. Designed and progressing through six build phases: progressive knowledge building, self-healing database creation, and agentic task execution.',
     tech: 'Claude API, Chrome Manifest V3, React, Supabase, MCP-ready architecture',
     github: 'Create-and-Source/sebastian-extension',
   },
@@ -76,7 +76,7 @@ const featuredProjects = [
     name: 'Dark Sky Admin',
     type: 'Client Operations Platform',
     desc: 'Museum operations system for the International Dark-Sky Discovery Center. Inventory management (56+ items), Square POS integration with webhooks, ticketing, gift shop, staff management, and AI-powered analytics. Built from user research with museum staff.',
-    tech: 'React, Supabase, Square API, AWS Lambda, DynamoDB, Webhooks',
+    tech: 'React, Supabase, Square API, webhooks',
     github: 'Create-and-Source/DarkSky_client',
   },
   {
@@ -137,7 +137,7 @@ const skills = [
   { cat: 'AI & Agentic Tools', items: 'Claude Code (daily driver), Claude API, OpenAI API, MCP protocol, agentic systems design, multi-agent workflow orchestration, prompt engineering' },
   { cat: 'Product', items: 'Customer discovery, requirements design, roadmap planning, prototype validation, feedback synthesis, competitive analysis, cross-functional execution' },
   { cat: 'Frontend', items: 'React, Vite, Next.js, TypeScript, JavaScript, Astro, Framer Motion' },
-  { cat: 'Backend & Data', items: 'Supabase (Postgres, Auth, Storage, Realtime), AWS Lambda, DynamoDB, API Gateway' },
+  { cat: 'Backend & Data', items: 'Supabase (Postgres, Auth, Storage, Realtime), serverless functions, webhooks' },
   { cat: 'APIs & Integrations', items: 'Stripe, Square, Gmail, SAGE, Printify, Alibaba, SSActivewear, Fulfill Engine, Resend' },
   { cat: 'Browser & IDE Extensions', items: 'Chrome Manifest V3, side panels, background workers, content scripts, VS Code extension architecture' },
   { cat: 'Developer Workflow', items: 'Git (branching, PRs, merge strategies), GitHub Organizations, Vercel CI/CD, CLI tooling, automated deployments' },
@@ -174,13 +174,13 @@ export default function App() {
           <p className="hero-p">
             In April 2023, I designed and operated an autonomous AI sales agent named Sebastian on the Go High Level CRM,
             six weeks before OpenAI shipped function calling, ten days before the platform shipped a competing native AI product.
-            Today I operate Brands By Status LLC (Create & Source) with 46+ repositories, 27 production applications,
+            Today I operate Brands By Status LLC (Create & Source) with 46+ repositories, 27 projects across client work, internal tools, and prototypes,
             and 4 Chrome Manifest V3 extensions for real clients including a Fortune 500 (Nutanix), the International Dark-Sky
             Discovery Center, and 7+ independent businesses.
           </p>
           <div className="hero-nums">
             <div className="num-block"><span className="num">46+</span><span className="num-label">Repositories</span></div>
-            <div className="num-block"><span className="num">27</span><span className="num-label">Applications</span></div>
+            <div className="num-block"><span className="num">27</span><span className="num-label">Projects</span></div>
             <div className="num-block"><span className="num">4</span><span className="num-label">Chrome Extensions</span></div>
             <div className="num-block"><span className="num">8+</span><span className="num-label">API Integrations</span></div>
           </div>
@@ -248,14 +248,16 @@ export default function App() {
                 mapped physically, so I could see where it was working and where leads were falling through.
               </p>
               <p className="origin-body">
-                Then I built the agent. Sebastian ran 8,983 real conversations across SMS and web chat, qualifying
-                leads, scheduling calls across time zones, retrieving policy data, and maintaining persona consistency.
-                No framework existed for this. I designed a hybrid architecture: deterministic keyword-triggered
-                workflows for predictable paths, AI for ambiguous ones, with hallucination guardrails I built myself.
+                Then I built the agent. Sebastian ran 8,983 real conversations across SMS and a custom web chat interface,
+                qualifying leads, scheduling calls across time zones, retrieving structured policy data, and maintaining
+                persona persistence throughout every thread ("Sincerely, Sebastian"). No framework existed for this.
+                I designed a hybrid architecture: deterministic keyword-triggered workflows for predictable paths,
+                AI for ambiguous ones, with hallucination guardrails I built myself.
               </p>
               <p className="origin-body">
-                Six weeks before OpenAI shipped function calling. Ten days before Go High Level shipped Eliza,
-                their own native AI agent platform. I was building agentic systems before the category had a name.
+                I branded the launch entity Infinite Financial and was preparing to go to market the week
+                Go High Level shipped Eliza, their own native AI agent platform. Six weeks before OpenAI shipped
+                function calling. I was building agentic systems before the category had a name.
               </p>
             </div>
             <div className="origin-photos">
