@@ -1,271 +1,326 @@
-import { useState, useRef } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 /* ═══════════════════════════════════════════════════════════
-   PROJECT DATA
+   DATA
    ═══════════════════════════════════════════════════════════ */
-const projects = [
-  { id: 'merchos', name: 'MerchOS', category: 'AI Platform', tagline: 'AI-Powered Merchandise Sourcing', description: 'Full SaaS platform where AI handles client communication, product sourcing, quoting, invoicing, and supplier management. 8 API integrations working together.', url: 'https://merchos-app.vercel.app', tech: ['React', 'TypeScript', 'Supabase', 'Stripe Connect', 'Gmail API', 'SAGE', 'OpenAI', 'Printify'] },
-  { id: 'olive', name: 'Olive', category: 'AI Product', tagline: 'Personal AI Companion', description: 'Conversational AI with journal, visualizations, task management, Gmail and GitHub integration, and text-to-speech.', url: 'https://askolive.vercel.app', tech: ['React', 'Claude API', 'TTS', 'Gmail API', 'GitHub API', 'Supabase'] },
-  { id: 'darksky-admin', name: 'Dark Sky Admin', category: 'Client Platform', tagline: 'Museum Operations System', description: 'Admin platform for the International Dark-Sky Discovery Center — inventory, Square POS, ticketing, gift shop, staff management, and AI analytics.', url: 'https://darksky-admin.vercel.app', tech: ['React', 'Supabase', 'Square API', 'AWS Lambda', 'DynamoDB', 'Webhooks'] },
-  { id: 'darksky-website', name: 'Dark Sky Website', category: 'Client Website', tagline: 'International Dark-Sky Discovery Center', description: 'Public-facing museum website — gold design system, real photography, IDSDC branding, mobile-responsive.', url: 'https://darksky-website.vercel.app', tech: ['React', 'Vite', 'Framer Motion'] },
-  { id: 'cs-platform', name: 'CS Platform', category: 'AI Platform', tagline: 'Business Operations Dashboard', description: 'Internal ops tool with real Stripe data ($52K tracked), Gmail inbox, SAGE product search, supplier management.', url: 'https://cs-platform-app.vercel.app', tech: ['React', 'TypeScript', 'Stripe', 'Gmail API', 'SAGE API', 'Supabase'] },
-  { id: 'nutanix', name: 'Nutanix Store', category: 'E-Commerce', tagline: 'Corporate Employee Merchandise', description: 'Enterprise merch store for Fortune 500 tech company — employee request/approval workflows, fulfillment tracking, admin panel.', url: 'https://nutanix-store.vercel.app', tech: ['React', 'Supabase', 'Admin Dashboard'] },
-  { id: 'eastwood', name: 'Eastwood Co. Supply', category: 'E-Commerce', tagline: 'Western Streetwear', description: 'Full apparel line for content creator @eastwood0100 — AI-generated lifestyle photography, western streetwear aesthetic.', url: 'https://eastwood-store.vercel.app', tech: ['React', 'Stripe', 'Printify', 'Order Desk'] },
-  { id: 'clublumen', name: 'Club Lumen', category: 'E-Commerce', tagline: 'Desert-Disco Morning Rave Merch', description: 'Merch store for Phoenix morning rave brand — full dropshipping fulfillment, zero inventory held.', url: 'https://clublumen-store.vercel.app', tech: ['React', 'Stripe', 'Order Desk', 'Dropshipping'] },
-  { id: 'shift', name: 'Shift', category: 'E-Commerce', tagline: 'Streetwear Dropshipping', description: 'Streetwear brand with Order Desk fulfillment and Stripe Connect split payments.', url: 'https://shift-store.vercel.app', tech: ['React', 'Stripe Connect', 'Order Desk'] },
-  { id: 'une3q', name: 'UNE3Q LLC', category: 'E-Commerce', tagline: 'Handmade Jewelry & Art', description: 'E-commerce for handmade jewelry, art, and home decor with Supabase backend and admin panel.', url: 'https://une3q-store.vercel.app', tech: ['React', 'Supabase', 'Admin Panel'] },
-  { id: 'stefs', name: "Stef's Kitchen", category: 'E-Commerce', tagline: 'Where The Hooks Get Cooked', description: 'Merch store for $tef the Chef — viral jingle creator. Tees, hoodies, varsity jacket.', url: 'https://stefs-kitchen.vercel.app/home', tech: ['React', 'Shopify', 'Framer Motion'] },
-  { id: 'brickroad', name: 'Brick Road Media', category: 'Client Website', tagline: 'Videography Portfolio', description: 'Portfolio site for Cameron Jacobs — videography showcase, modern design, contact integration.', url: 'https://brickroad-website.vercel.app', tech: ['React', 'Vite', 'Supabase'] },
-  { id: 'sonoran', name: 'Sonoran Family Concierge', category: 'Client Website', tagline: 'Senior Care & Nanny Services', description: 'Full SEO-optimized site with Google Search Console, custom domain — senior care in Scottsdale.', url: 'https://sonoranfamilyconcierge.com', tech: ['React', 'SEO', 'Google Search Console'] },
-  { id: 'motionalsoul', name: 'Motional Soul', category: 'Client Website', tagline: 'GYROTONIC & Pilates Training', description: 'Training platform for Natasha Rachelle — GYROTONIC, Pilates, and Barre with scheduling.', url: 'https://motionalsoul.vercel.app', tech: ['React', 'Vite', 'Framer Motion'] },
-  { id: 'rewire', name: 'REWIRE', category: 'Wellness App', tagline: 'Neural Recovery Companion', description: 'Sobriety tracker, dream journal, visualization tools for neural pathway recovery.', url: 'https://rewire-app-kappa.vercel.app', tech: ['React', 'Supabase', 'Vite'] },
-  { id: 'personaltrainer', name: 'FORGE Performance', category: 'Wellness App', tagline: 'Personal Training Platform', description: 'Workout builder with ExerciseDB API, trainer profiles, and exercise library.', url: 'https://personaltrainer-alpha.vercel.app', tech: ['React', 'ExerciseDB API', 'Vite'] },
-  { id: 'xpro', name: 'XPRO Events', category: 'Wellness App', tagline: 'Event Management', description: 'Event management app with Stitch design system and pass management.', url: 'https://xpro-app-blue.vercel.app', tech: ['React', 'Vite'] },
-  { id: 'heytovah', name: 'Hey Tovah', category: 'Social App', tagline: 'TikTok Live Q&A Companion', description: 'Anonymous question submission for TikTok live with moderation panel.', url: 'https://hey-tovah.vercel.app', tech: ['React', 'Supabase', 'Realtime'] },
-  { id: 'brandsbystatus', name: 'Brands By Status', category: 'Agency Platform', tagline: 'Merch Stores for Influencers', description: 'Agency site — AI product photos, custom stores, revenue share model.', url: 'https://brandsbystatus.vercel.app', tech: ['React', 'Vite', 'Framer Motion'] },
-  { id: 'creativejazz', name: 'Creative Jazz LLC', category: 'Agency Platform', tagline: 'Social Media Agency Demo', description: '4-role interactive SPA with shared state and campaign management.', url: 'https://creative-jazz.vercel.app', tech: ['React', 'Shared State', 'Multi-Role'] },
-  { id: 'media4you', name: 'Media4You', category: 'Agency Platform', tagline: '5-Role Media Company Platform', description: 'Full agency platform — 5 user roles, campaign management, ~4500 line application.', url: 'https://media4you.vercel.app', tech: ['React', 'Multi-Role', 'Vite'] },
-  { id: 'medspa', name: 'MedSpa Platform', category: 'Agency Platform', tagline: 'White-Label Medspa Software', description: '22-page medspa management — appointments, patients, payments, charting, inventory.', url: 'https://medspa-platform.vercel.app', tech: ['HTML', 'CSS', 'JavaScript'] },
-  { id: 'makayla', name: "Makayla Me'chelle", category: 'Client Platform', tagline: 'Talent Command Center', description: 'Model portfolio and self-management dashboard for bookings and career management.', url: 'https://makayla-app.vercel.app', tech: ['React', 'Vite', 'Supabase'] },
-  { id: 'createandsource', name: 'Create & Source', category: 'Portfolio Site', tagline: 'Studio Blonde Editorial Design', description: 'Company portfolio — editorial design, client stores lookbook, services.', url: 'https://createandsource-website.vercel.app', tech: ['React', 'Framer Motion', 'Vite'] },
-  { id: 'getstoa', name: 'Get Stoa', category: 'Design Showcase', tagline: "The Seller's Platform", description: 'Interactive selector with browser frame showcases and animated features.', url: 'https://getstoa.vercel.app', tech: ['React', 'Framer Motion', 'Vite'] },
-  { id: 'getstoa-app', name: 'Stoa App', category: 'Design Showcase', tagline: 'Dark Editorial Experience', description: 'Dark editorial — full-bleed photography, botanical imagery, premium minimal.', url: 'https://getstoa-app.vercel.app', tech: ['React', 'Dark Theme', 'Vite'] },
-  { id: 'continuum', name: 'Continuum Club', category: 'Design Showcase', tagline: 'Dark Mode Design System', description: 'Design reference — #0D0D0D, Inter 900, all-caps, grayscale, Framer Motion.', url: 'https://continuum-club.vercel.app', tech: ['React', 'Framer Motion', 'Design System'] },
+const experience = [
+  {
+    role: 'Founder & Product Lead',
+    company: 'Brands By Status LLC / Create & Source',
+    period: '2025 - Present',
+    points: [
+      'Designed, built, and shipped 46+ repositories and 27 live production applications using Claude Code as my primary development tool',
+      'Built Sebastian AI — an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
+      'Shipped MerchOS — an AI-powered merchandise sourcing platform integrating 8 APIs (Stripe Connect, Gmail, SAGE, OpenAI, Printify, Alibaba, SSActivewear, Fulfill Engine)',
+      'Built 4 Chrome extensions using Manifest V3 — side panels, background workers, and content scripts',
+      'Conducted product discovery with real clients including a museum (IDSDC/Dark Sky), Fortune 500 (Nutanix), and 7+ independent businesses',
+      'Wrote product specifications, competitive analyses, design systems, and phased build roadmaps for every major project',
+      'Managed a GitHub organization with 46+ repositories and automated CI/CD deployments via Vercel',
+    ],
+  },
+  {
+    role: 'Business Development Manager',
+    company: 'Commercial Capital Co',
+    period: '2022 - 2025',
+    points: [
+      'Designed and implemented a company-wide Salesforce system, streamlining operations from lead generation through deal completion',
+      'Built automated workflow systems that improved client engagement and operational efficiency',
+      'Led employee onboarding by configuring cross-departmental tooling and systems',
+    ],
+  },
+  {
+    role: 'Life Insurance Sales & AI System Design',
+    company: 'Family First Life',
+    period: '2020 - 2022',
+    points: [
+      'Managed a high-performing sales team while designing an AI-powered CRM system with automated workflows',
+      'Created custom tools to track leads, follow-ups, and client interactions',
+    ],
+  },
+  {
+    role: 'Real Estate Agent',
+    company: 'Self-Employed',
+    period: '2020 - 2022',
+    points: [
+      '72 homes sold — 20+ in the first year, 500% above industry average',
+      'Trained and mentored new sales consultants',
+    ],
+  },
 ]
 
-const categories = ['All', 'AI Platform', 'AI Product', 'Client Platform', 'Client Website', 'E-Commerce', 'Wellness App', 'Social App', 'Agency Platform', 'Portfolio Site', 'Design Showcase']
+const featuredProjects = [
+  {
+    name: 'Sebastian AI',
+    type: 'Agentic AI + Chrome Extension',
+    desc: 'An AI concierge that learns any business through observation. Chrome extension with 5 tab workers feeds context to a web app that builds itself around your operations. Progressive knowledge building, self-healing database creation.',
+    tech: 'Claude API, Chrome Manifest V3, React, Supabase',
+    github: 'Create-and-Source/sebastian-extension',
+  },
+  {
+    name: 'MerchOS',
+    type: 'AI SaaS Platform',
+    desc: 'AI-powered merchandise sourcing platform where AI handles client communication, product sourcing, quoting, invoicing, and supplier management. 8 API integrations working as one system.',
+    tech: 'React, TypeScript, Supabase, Stripe Connect, Gmail API, SAGE, OpenAI, Printify',
+    github: 'Create-and-Source/merchos',
+  },
+  {
+    name: 'Dark Sky Admin',
+    type: 'Client Operations Platform',
+    desc: 'Museum operations system for the International Dark-Sky Discovery Center. Inventory management (56+ items), Square POS integration with webhooks, ticketing, gift shop, staff management, AI-powered analytics.',
+    tech: 'React, Supabase, Square API, AWS Lambda, DynamoDB, Webhooks',
+    github: 'Create-and-Source/DarkSky_client',
+  },
+  {
+    name: 'Nutanix Corporate Store',
+    type: 'Enterprise E-Commerce',
+    desc: 'Employee merchandise store for Fortune 500 tech company. Request/approval workflows, fulfillment tracking, admin management panel.',
+    tech: 'React, Supabase, Admin Dashboard',
+    github: 'Create-and-Source/nutanix-store',
+  },
+  {
+    name: 'CS Platform',
+    type: 'Business Operations Dashboard',
+    desc: 'Internal ops tool processing $52K+ in real Stripe transactions. Gmail inbox integration, SAGE product search, supplier management.',
+    tech: 'React, TypeScript, Stripe, Gmail API, SAGE API, Supabase',
+    github: 'Create-and-Source/cs-platform',
+  },
+  {
+    name: 'Olive',
+    type: 'AI Companion App',
+    desc: 'Personal AI with conversational chat, journal, task management, Gmail and GitHub integration, text-to-speech.',
+    tech: 'React, Claude API, TTS, Gmail API, GitHub API, Supabase',
+    github: 'Create-and-Source/olive-app',
+  },
+]
+
+const allProjects = [
+  { name: 'Eastwood Co. Supply', type: 'E-Commerce', desc: 'Western streetwear for @eastwood0100', github: 'Create-and-Source/eastwood-store' },
+  { name: 'Club Lumen', type: 'E-Commerce', desc: 'Desert-disco morning rave merch, full dropshipping', github: 'Create-and-Source/clublumen-store' },
+  { name: 'Shift', type: 'E-Commerce', desc: 'Streetwear with Stripe Connect split payments', github: 'Create-and-Source/shift-store' },
+  { name: 'UNE3Q LLC', type: 'E-Commerce', desc: 'Handmade jewelry and art marketplace', github: 'Create-and-Source/une3q-store' },
+  { name: "Stef's Kitchen", type: 'E-Commerce', desc: 'Merch for viral jingle creator $tef the Chef', github: 'Create-and-Source/stefs-kitchen' },
+  { name: 'Brick Road Media', type: 'Client Website', desc: 'Videography portfolio for Cameron Jacobs', github: 'Create-and-Source/brickroad-website' },
+  { name: 'Sonoran Family Concierge', type: 'Client Website', desc: 'Senior care services, full SEO, custom domain', github: 'Create-and-Source/sonoran-senior-concierge' },
+  { name: 'Motional Soul', type: 'Client Website', desc: 'GYROTONIC & Pilates training platform', github: 'Create-and-Source/motionalsoul' },
+  { name: 'Dark Sky Website', type: 'Client Website', desc: 'Museum public site with gold design system', github: 'Create-and-Source/darksky-website' },
+  { name: 'REWIRE', type: 'Wellness App', desc: 'Neural recovery companion, sobriety tracker', github: 'Create-and-Source/rewire-app' },
+  { name: 'FORGE Performance', type: 'Wellness App', desc: 'Personal training with ExerciseDB API', github: 'Create-and-Source/personaltrainer' },
+  { name: 'XPRO Events', type: 'App', desc: 'Event management with Stitch design system', github: 'Create-and-Source/xpro-app' },
+  { name: 'Hey Tovah', type: 'Social App', desc: 'TikTok live Q&A with anonymous questions', github: 'Create-and-Source/hey-tovah' },
+  { name: 'Brands By Status', type: 'Agency', desc: 'Merch stores for influencers, AI product photos', github: 'Create-and-Source/brandsbystatus' },
+  { name: 'Creative Jazz LLC', type: 'Agency Demo', desc: '4-role social media agency platform', github: 'Create-and-Source/creative-jazz' },
+  { name: 'Media4You', type: 'Agency Demo', desc: '5-role media company, ~4500 line app', github: 'Create-and-Source/media4you' },
+  { name: 'MedSpa Platform', type: 'SaaS Demo', desc: '22-page white-label medspa management', github: 'Create-and-Source/medspa-platform' },
+  { name: "Makayla Me'chelle", type: 'Client Platform', desc: 'Talent command center for model management', github: 'tovahmarx/makayla-app' },
+  { name: 'Create & Source', type: 'Portfolio', desc: 'Company site with editorial design language', github: 'Create-and-Source/createandsource-website' },
+  { name: 'Get Stoa', type: 'Design', desc: 'Interactive product showcase', github: 'Create-and-Source/getstoa' },
+  { name: 'Continuum Club', type: 'Design', desc: 'Dark mode design system reference', github: 'Create-and-Source/continuum-club' },
+]
 
 const extensions = [
-  { name: 'Sebastian AI', desc: 'Agentic AI copilot with 5 tab workers that observe browsing context and progressively learn business operations', tech: 'Side Panel · 5 Workers' },
-  { name: 'Alibaba Importer', desc: 'One-click product import from Alibaba supplier pages directly into the platform', tech: 'Content Scripts' },
-  { name: 'SiteScout', desc: 'CRM-connected prospecting tool for real-time site analysis during outreach', tech: 'Side Panel' },
-  { name: 'MerchOS Extension', desc: 'Import and manage products from any supplier website', tech: 'Content Scripts' },
+  { name: 'Sebastian AI', desc: 'Side panel copilot with 5 tab workers — observes context, learns business operations progressively' },
+  { name: 'Alibaba Importer', desc: 'One-click product import from Alibaba supplier pages into the platform' },
+  { name: 'SiteScout', desc: 'CRM-connected prospecting tool for real-time site analysis' },
+  { name: 'MerchOS Extension', desc: 'Import and manage products from any supplier website' },
 ]
 
-const techStack = [
-  { label: 'AI', items: 'Claude Code, Claude API, OpenAI' },
-  { label: 'Frontend', items: 'React, Vite, Next.js, TypeScript' },
-  { label: 'Backend', items: 'Supabase, AWS Lambda, DynamoDB' },
-  { label: 'Payments', items: 'Stripe, Stripe Connect, Square' },
-  { label: 'APIs', items: 'Gmail, SAGE, Printify, Alibaba, Resend' },
-  { label: 'Deploy', items: 'Vercel, GitHub Organizations' },
-  { label: 'Extensions', items: 'Chrome Manifest V3' },
-  { label: 'Design', items: 'Framer Motion, Design Systems' },
+const skills = [
+  { cat: 'AI Development', items: 'Claude Code (daily), Claude API, OpenAI API, AI-assisted workflows' },
+  { cat: 'Frontend', items: 'React, Vite, Next.js, TypeScript, JavaScript, Astro, Framer Motion' },
+  { cat: 'Backend & Data', items: 'Supabase (Postgres, Auth, Storage, Realtime), AWS Lambda, DynamoDB, API Gateway' },
+  { cat: 'APIs & Integrations', items: 'Stripe, Square, Gmail, SAGE, Printify, Alibaba, SSActivewear, Fulfill Engine, Resend' },
+  { cat: 'Browser Extensions', items: 'Chrome Manifest V3 — side panels, background workers, content scripts' },
+  { cat: 'Infrastructure', items: 'Vercel (CI/CD), GitHub Organizations, custom domains, automated deployments' },
 ]
 
-/* ═══════════════════════════════════════════════════════════
-   PROJECT CARD — Case study style, interactive iframe
-   ═══════════════════════════════════════════════════════════ */
-function ProjectCard({ project, index }) {
-  const [loaded, setLoaded] = useState(false)
-  const [error, setError] = useState(false)
-  const [interacting, setInteracting] = useState(false)
-
-  const displayIndex = String(index + 1).padStart(2, '0')
-
-  return (
-    <motion.article
-      className="case"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {/* Case study header */}
-      <div className="case-header">
-        <div className="case-meta">
-          <span className="case-index">{displayIndex}</span>
-          <span className="case-divider">/</span>
-          <span className="case-category">{project.category}</span>
-        </div>
-        <h3 className="case-name">{project.name}</h3>
-        <p className="case-tagline">{project.tagline}</p>
-      </div>
-
-      {/* Interactive browser embed */}
-      <div
-        className={`case-browser ${interacting ? 'active' : ''}`}
-        onMouseEnter={() => setInteracting(true)}
-        onMouseLeave={() => setInteracting(false)}
-      >
-        <div className="case-browser-bar">
-          <div className="bar-dots"><span /><span /><span /></div>
-          <div className="bar-title">{project.name}</div>
-          <div className="bar-spacer" />
-        </div>
-        <div className="case-viewport">
-          {!loaded && !error && (
-            <div className="case-loading">
-              <div className="case-loading-bar" />
-            </div>
-          )}
-          {error ? (
-            <div className="case-error">
-              <p className="case-error-name">{project.name}</p>
-              <p className="case-error-tag">{project.tagline}</p>
-            </div>
-          ) : (
-            <iframe
-              src={project.url}
-              title={project.name}
-              className={`case-iframe ${loaded ? 'show' : ''}`}
-              sandbox="allow-scripts allow-same-origin allow-popups"
-              loading="lazy"
-              onLoad={() => setLoaded(true)}
-              onError={() => setError(true)}
-            />
-          )}
-          {!interacting && loaded && (
-            <div className="case-hover-hint">
-              <span>Scroll to explore</span>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Case study details */}
-      <div className="case-details">
-        <p className="case-desc">{project.description}</p>
-        <div className="case-tech">
-          {project.tech.map((t, i) => (
-            <span key={i} className="case-tech-item">{t}</span>
-          ))}
-        </div>
-      </div>
-    </motion.article>
-  )
-}
+const fade = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 } }
 
 /* ═══════════════════════════════════════════════════════════
    APP
    ═══════════════════════════════════════════════════════════ */
 export default function App() {
-  const [filter, setFilter] = useState('All')
-  const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter)
-
   return (
-    <div className="portfolio">
+    <div className="page">
       {/* ── HEADER ── */}
-      <header className="site-header">
-        <div className="header-inner">
-          <span className="header-name">Tovah Marx</span>
-          <nav className="header-nav">
+      <header className="hd">
+        <div className="hd-inner">
+          <span className="hd-name">Tovah Marx</span>
+          <nav className="hd-nav">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#projects">Projects</a>
             <a href="https://github.com/Create-and-Source" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="mailto:Tovah.Marx@gmail.com">Contact</a>
           </nav>
         </div>
       </header>
 
       {/* ── HERO ── */}
       <section className="hero">
-        <div className="hero-inner">
-          <motion.div className="hero-badge" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }}>
-            <span>Scottsdale, AZ</span>
-          </motion.div>
-          <motion.h1 className="hero-title" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8 }}>
-            Product Designer<br />& Builder
-          </motion.h1>
-          <motion.p className="hero-desc" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-            I design, build, and ship production applications using AI-assisted development.
-            <br />
-            46+ repositories, 27 live applications, and 4 Chrome extensions — all shipped.
-          </motion.p>
-          <motion.div className="hero-stats" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-            {[
-              { n: '46+', l: 'Repos' },
-              { n: '27', l: 'Live Apps' },
-              { n: '4', l: 'Extensions' },
-              { n: '8+', l: 'API Integrations' },
-            ].map((s, i) => (
-              <div key={i} className="hero-stat">
-                <span className="hero-stat-n">{s.n}</span>
-                <span className="hero-stat-l">{s.l}</span>
+        <motion.div className="hero-inner" {...fade}>
+          <h1 className="hero-h1">
+            I design products, build them<br />with AI, and ship them.
+          </h1>
+          <p className="hero-p">
+            Product builder based in Scottsdale, AZ. I use Claude Code every day to design, develop, and deploy production applications.
+            Over the past year I've shipped 46+ repositories, 27 live apps, 4 Chrome extensions, and integrated 8+ external APIs —
+            all for real clients and real users.
+          </p>
+          <div className="hero-nums">
+            <div className="num-block"><span className="num">46+</span><span className="num-label">Repositories</span></div>
+            <div className="num-block"><span className="num">27</span><span className="num-label">Live Applications</span></div>
+            <div className="num-block"><span className="num">4</span><span className="num-label">Chrome Extensions</span></div>
+            <div className="num-block"><span className="num">8+</span><span className="num-label">API Integrations</span></div>
+          </div>
+          <div className="hero-links">
+            <a href="https://github.com/Create-and-Source" target="_blank" rel="noopener noreferrer" className="btn">GitHub Organization</a>
+            <a href="mailto:Tovah.Marx@gmail.com" className="btn ghost">Tovah.Marx@gmail.com</a>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ── ABOUT ── */}
+      <section className="sect" id="about">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">About</span>
+          <div className="about-content">
+            <div className="about-text">
+              <p>
+                I'm a product builder who lives at the intersection of design, technology, and business.
+                My background is unconventional — psychology degrees, real estate, insurance sales — but
+                every role taught me the same thing: understand what people need, then build the system that delivers it.
+              </p>
+              <p>
+                I discovered AI-assisted development in 2025 and haven't stopped shipping since.
+                Claude Code is my daily driver. I use it to go from idea to deployed product in hours,
+                not weeks. I think in products — not just features — and I care deeply about the
+                experience of the people using what I build.
+              </p>
+              <p>
+                I've built AI agents that learn business operations, SaaS platforms that integrate
+                8 APIs, Chrome extensions that observe and automate, and e-commerce stores for clients
+                ranging from independent creators to Fortune 500 companies. Everything I build ships
+                to production with real users.
+              </p>
+            </div>
+            <div className="about-edu">
+              <h3 className="about-edu-title">Education</h3>
+              <div className="edu-item">
+                <span className="edu-degree">MS Forensic Psychology</span>
+                <span className="edu-school">Southern New Hampshire University, 2020</span>
+              </div>
+              <div className="edu-item">
+                <span className="edu-degree">BS Psychology</span>
+                <span className="edu-school">University of Arizona, 2014</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* ── SKILLS ── */}
+      <section className="sect" id="skills">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">Technical Skills</span>
+          <div className="skills-grid">
+            {skills.map((s, i) => (
+              <div key={i} className="skill-row">
+                <span className="skill-cat">{s.cat}</span>
+                <span className="skill-items">{s.items}</span>
               </div>
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </section>
 
-      {/* ── EXTENSIONS ── */}
-      <section className="section extensions">
-        <div className="section-inner">
-          <div className="section-head">
-            <span className="section-label">Chrome Extensions</span>
-            <h2 className="section-title">4 Published Extensions</h2>
-            <p className="section-sub">Chrome Manifest V3 — side panels, background workers, content scripts</p>
-          </div>
-          <div className="ext-grid">
-            {extensions.map((ext, i) => (
-              <motion.div key={i} className="ext-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
-                <div className="ext-top">
-                  <span className="ext-num">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="ext-tech">{ext.tech}</span>
+      {/* ── EXPERIENCE ── */}
+      <section className="sect" id="work">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">Experience</span>
+          <div className="exp-list">
+            {experience.map((job, i) => (
+              <motion.div key={i} className="exp-item" {...fade} transition={{ delay: i * 0.05 }}>
+                <div className="exp-head">
+                  <div>
+                    <h3 className="exp-role">{job.role}</h3>
+                    <p className="exp-company">{job.company}</p>
+                  </div>
+                  <span className="exp-period">{job.period}</span>
                 </div>
-                <h3 className="ext-name">{ext.name}</h3>
-                <p className="ext-desc">{ext.desc}</p>
+                <ul className="exp-points">
+                  {job.points.map((p, j) => (
+                    <li key={j}>{p}</li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* ── PROJECTS ── */}
-      <section className="section projects">
-        <div className="section-inner">
-          <div className="section-head">
-            <span className="section-label">Work</span>
-            <h2 className="section-title">Selected Projects</h2>
+      {/* ── CHROME EXTENSIONS ── */}
+      <section className="sect">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">Chrome Extensions</span>
+          <p className="sect-desc">4 published extensions built with Chrome Manifest V3 — side panels, background workers, and content scripts.</p>
+          <div className="ext-list">
+            {extensions.map((ext, i) => (
+              <div key={i} className="ext-row">
+                <span className="ext-name">{ext.name}</span>
+                <span className="ext-desc">{ext.desc}</span>
+              </div>
+            ))}
           </div>
-
-          <div className="filter-row">
-            {categories.map(cat => {
-              const count = cat === 'All' ? projects.length : projects.filter(p => p.category === cat).length
-              if (count === 0 && cat !== 'All') return null
-              return (
-                <button key={cat} className={`f-btn ${filter === cat ? 'on' : ''}`} onClick={() => setFilter(cat)}>
-                  {cat}
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="cases">
-            <AnimatePresence mode="popLayout">
-              {filtered.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} />
-              ))}
-            </AnimatePresence>
-          </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* ── STACK ── */}
-      <section className="section stack">
-        <div className="section-inner">
-          <div className="section-head">
-            <span className="section-label">Technology</span>
-            <h2 className="section-title">Full Stack</h2>
-          </div>
-          <div className="stack-grid">
-            {techStack.map((s, i) => (
-              <motion.div key={i} className="stack-cell" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }}>
-                <span className="stack-key">{s.label}</span>
-                <span className="stack-val">{s.items}</span>
+      {/* ── FEATURED PROJECTS ── */}
+      <section className="sect" id="projects">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">Featured Projects</span>
+          <div className="feat-list">
+            {featuredProjects.map((p, i) => (
+              <motion.div key={i} className="feat-card" {...fade} transition={{ delay: i * 0.04 }}>
+                <div className="feat-top">
+                  <h3 className="feat-name">{p.name}</h3>
+                  <span className="feat-type">{p.type}</span>
+                </div>
+                <p className="feat-desc">{p.desc}</p>
+                <div className="feat-bottom">
+                  <span className="feat-tech">{p.tech}</span>
+                  <a href={`https://github.com/${p.github}`} target="_blank" rel="noopener noreferrer" className="feat-link">View on GitHub</a>
+                </div>
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
+      </section>
+
+      {/* ── ALL PROJECTS ── */}
+      <section className="sect">
+        <motion.div className="sect-inner" {...fade}>
+          <span className="sect-label">All Projects</span>
+          <p className="sect-desc">21 additional shipped projects across e-commerce, client sites, wellness apps, agency platforms, and design systems.</p>
+          <div className="all-grid">
+            {allProjects.map((p, i) => (
+              <a key={i} href={`https://github.com/${p.github}`} target="_blank" rel="noopener noreferrer" className="all-row">
+                <span className="all-name">{p.name}</span>
+                <span className="all-type">{p.type}</span>
+                <span className="all-desc">{p.desc}</span>
+                <span className="all-arrow">&rarr;</span>
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="site-footer">
-        <div className="footer-inner">
-          <p className="footer-copy">Tovah Marx &middot; Scottsdale, AZ</p>
-          <div className="footer-links">
-            <a href="https://github.com/Create-and-Source" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="mailto:Tovah.Marx@gmail.com">Email</a>
+      <footer className="ft">
+        <div className="ft-inner">
+          <div>
+            <p className="ft-name">Tovah Marx</p>
+            <p className="ft-info">Scottsdale, AZ &middot; Tovah.Marx@gmail.com &middot; 619-955-0507</p>
           </div>
+          <a href="https://github.com/Create-and-Source" target="_blank" rel="noopener noreferrer" className="ft-gh">GitHub</a>
         </div>
       </footer>
     </div>
