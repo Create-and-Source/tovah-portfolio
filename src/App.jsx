@@ -10,9 +10,9 @@ const experience = [
     period: '2025 - Present',
     points: [
       'Designed, built, and shipped 46+ repositories and 27 live production applications using Claude Code as my primary development tool',
-      'Built Sebastian AI — an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
-      'Shipped MerchOS — an AI-powered merchandise sourcing platform integrating 8 APIs (Stripe Connect, Gmail, SAGE, OpenAI, Printify, Alibaba, SSActivewear, Fulfill Engine)',
-      'Built 4 Chrome extensions using Manifest V3 — side panels, background workers, and content scripts',
+      'Built Sebastian AI, an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
+      'Shipped MerchOS, an AI-powered merchandise sourcing platform integrating 8 APIs (Stripe Connect, Gmail, SAGE, OpenAI, Printify, Alibaba, SSActivewear, Fulfill Engine)',
+      'Built 4 Chrome extensions using Manifest V3 including side panels, background workers, and content scripts',
       'Conducted product discovery with real clients including a museum (IDSDC/Dark Sky), Fortune 500 (Nutanix), and 7+ independent businesses',
       'Wrote product specifications, competitive analyses, design systems, and phased build roadmaps for every major project',
       'Managed a GitHub organization with 46+ repositories and automated CI/CD deployments via Vercel',
@@ -42,7 +42,7 @@ const experience = [
     company: 'Self-Employed',
     period: '2020 - 2022',
     points: [
-      '72 homes sold — 20+ in the first year, 500% above industry average',
+      '72 homes sold with 20+ in the first year, 500% above industry average',
       'Trained and mentored new sales consultants',
     ],
   },
@@ -118,7 +118,7 @@ const allProjects = [
 ]
 
 const extensions = [
-  { name: 'Sebastian AI', desc: 'Side panel copilot with 5 tab workers — observes context, learns business operations progressively' },
+  { name: 'Sebastian AI', desc: 'Side panel copilot with 5 tab workers that observes context and learns business operations progressively' },
   { name: 'Alibaba Importer', desc: 'One-click product import from Alibaba supplier pages into the platform' },
   { name: 'SiteScout', desc: 'CRM-connected prospecting tool for real-time site analysis' },
   { name: 'MerchOS Extension', desc: 'Import and manage products from any supplier website' },
@@ -129,7 +129,7 @@ const skills = [
   { cat: 'Frontend', items: 'React, Vite, Next.js, TypeScript, JavaScript, Astro, Framer Motion' },
   { cat: 'Backend & Data', items: 'Supabase (Postgres, Auth, Storage, Realtime), AWS Lambda, DynamoDB, API Gateway' },
   { cat: 'APIs & Integrations', items: 'Stripe, Square, Gmail, SAGE, Printify, Alibaba, SSActivewear, Fulfill Engine, Resend' },
-  { cat: 'Browser Extensions', items: 'Chrome Manifest V3 — side panels, background workers, content scripts' },
+  { cat: 'Browser Extensions', items: 'Chrome Manifest V3, side panels, background workers, content scripts' },
   { cat: 'Infrastructure', items: 'Vercel (CI/CD), GitHub Organizations, custom domains, automated deployments' },
 ]
 
@@ -162,7 +162,7 @@ export default function App() {
           </h1>
           <p className="hero-p">
             Product builder based in Scottsdale, AZ. I use Claude Code every day to design, develop, and deploy production applications.
-            Over the past year I've shipped 46+ repositories, 27 live apps, 4 Chrome extensions, and integrated 8+ external APIs —
+            Over the past year I've shipped 46+ repositories, 27 live apps, 4 Chrome extensions, and integrated 8+ external APIs,
             all for real clients and real users.
           </p>
           <div className="hero-nums">
@@ -186,13 +186,13 @@ export default function App() {
             <div className="about-text">
               <p>
                 I'm a product builder who lives at the intersection of design, technology, and business.
-                My background is unconventional — psychology degrees, real estate, insurance sales — but
+                My background is unconventional (psychology degrees, real estate, insurance sales) but
                 every role taught me the same thing: understand what people need, then build the system that delivers it.
               </p>
               <p>
                 I discovered AI-assisted development in 2025 and haven't stopped shipping since.
                 Claude Code is my daily driver. I use it to go from idea to deployed product in hours,
-                not weeks. I think in products — not just features — and I care deeply about the
+                not weeks. I think in products, not just features, and I care deeply about the
                 experience of the people using what I build.
               </p>
               <p>
@@ -261,7 +261,7 @@ export default function App() {
       <section className="sect">
         <motion.div className="sect-inner" {...fade}>
           <span className="sect-label">Chrome Extensions</span>
-          <p className="sect-desc">4 published extensions built with Chrome Manifest V3 — side panels, background workers, and content scripts.</p>
+          <p className="sect-desc">4 published extensions built with Chrome Manifest V3 including side panels, background workers, and content scripts.</p>
           <div className="ext-list">
             {extensions.map((ext, i) => (
               <div key={i} className="ext-row">
