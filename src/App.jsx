@@ -10,7 +10,7 @@ const experience = [
     period: '2025 - Present',
     points: [
       'Led product vision, roadmap, and development of 46+ repositories and 27 live production applications, shipping daily using Claude Code as my primary development tool',
-      'Built Sebastian AI, an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
+      'Built Sebastian AI (v2), an agentic AI concierge with a Chrome extension that observes user context across 5 browser tabs, learns business operations progressively, and automates workflows',
       'Shipped MerchOS, an AI-powered merchandise sourcing platform integrating 8 APIs (Stripe Connect, Gmail, SAGE, OpenAI, Printify, Alibaba, SSActivewear, Fulfill Engine)',
       'Built 4 Chrome extensions using Manifest V3 including side panels, background workers, and content scripts',
       'Conducted user research and product discovery with real clients including a museum (IDSDC/Dark Sky), Fortune 500 (Nutanix), and 7+ independent businesses, translating feedback into prioritized feature roadmaps',
@@ -21,7 +21,7 @@ const experience = [
   {
     role: 'Business Development Manager',
     company: 'Commercial Capital Co',
-    period: '2022 - 2025',
+    period: '2023 - 2025',
     points: [
       'Designed and implemented a company-wide Salesforce system, streamlining operations from lead generation through deal completion',
       'Built automated workflow systems that improved client engagement and operational efficiency',
@@ -29,12 +29,14 @@ const experience = [
     ],
   },
   {
-    role: 'Life Insurance Sales & AI System Design',
+    role: 'Founder & Builder, Infinite Financial / Licensed Agent',
     company: 'Family First Life',
-    period: '2020 - 2022',
+    period: '2022 - 2023',
     points: [
-      'Managed a high-performing sales team while designing an AI-powered CRM system with automated workflows',
-      'Created custom tools to track leads, follow-ups, and client interactions',
+      'Designed and shipped Sebastian (v1), an autonomous AI sales agent built on Go High Level using webhooks, Zapier, and Google Sheets, with persona and product knowledge managed in a spreadsheet I could iterate without touching code. Six weeks before OpenAI shipped function calling.',
+      'Hybrid deterministic-plus-AI architecture handled lead qualification, multi-timezone scheduling, structured policy data retrieval, persona persistence, and hallucination guardrails. Ran 8,983 real conversations across SMS and web chat.',
+      'Iterated through two persona models: first-person impersonator, then third-person assistant. Branded the launch entity Infinite Financial.',
+      'Concurrent role at FFL: managed and coached a sales team, ran training, sold policies as a licensed agent.',
     ],
   },
   {
@@ -50,9 +52,16 @@ const experience = [
 
 const featuredProjects = [
   {
-    name: 'Sebastian AI',
+    name: 'Sebastian (v1) / Infinite Financial',
+    type: 'Autonomous AI Agent (2023)',
+    desc: 'Designed and operated an autonomous AI sales agent on the Go High Level CRM, handling 8,983+ real lead conversations in production. Built on webhooks, Zapier, and Google Sheets, with persona and product knowledge managed in a spreadsheet I could iterate without touching code. Hybrid architecture: deterministic keyword-triggered workflows for predictable paths, AI for ambiguous ones. Handled lead qualification, multi-timezone scheduling, structured policy data retrieval, persona persistence, and guardrails against hallucination. Six weeks before OpenAI shipped function calling. Ten days before Go High Level shipped Eliza, their own native AI agent platform.',
+    tech: 'Go High Level, OpenAI API (pre-function-calling), Zapier webhooks, Google Sheets, custom web chat',
+    github: null,
+  },
+  {
+    name: 'Sebastian AI (v2)',
     type: 'Agentic AI + Chrome Extension',
-    desc: 'An AI concierge that learns any business through observation. A Chrome extension with 5 tab workers feeds context into a web app that builds itself around your operations. Progressive knowledge building, self-healing database creation, and agentic task execution.',
+    desc: 'The evolution of the 2023 agent. An AI concierge that learns any business through observation. A Chrome extension with 5 tab workers feeds context into a web app that builds itself around your operations. Progressive knowledge building, self-healing database creation, and agentic task execution.',
     tech: 'Claude API, Chrome Manifest V3, React, Supabase, MCP-ready architecture',
     github: 'Create-and-Source/sebastian-extension',
   },
@@ -125,12 +134,14 @@ const extensions = [
 ]
 
 const skills = [
-  { cat: 'AI & Agentic Tools', items: 'Claude Code (daily driver), Claude API, OpenAI API, MCP protocol, AI-assisted development workflows, prompt engineering' },
+  { cat: 'AI & Agentic Tools', items: 'Claude Code (daily driver), Claude API, OpenAI API, MCP protocol, agentic systems design, multi-agent workflow orchestration, prompt engineering' },
+  { cat: 'Product', items: 'Customer discovery, requirements design, roadmap planning, prototype validation, feedback synthesis, competitive analysis, cross-functional execution' },
   { cat: 'Frontend', items: 'React, Vite, Next.js, TypeScript, JavaScript, Astro, Framer Motion' },
   { cat: 'Backend & Data', items: 'Supabase (Postgres, Auth, Storage, Realtime), AWS Lambda, DynamoDB, API Gateway' },
   { cat: 'APIs & Integrations', items: 'Stripe, Square, Gmail, SAGE, Printify, Alibaba, SSActivewear, Fulfill Engine, Resend' },
   { cat: 'Browser & IDE Extensions', items: 'Chrome Manifest V3, side panels, background workers, content scripts, VS Code extension architecture' },
   { cat: 'Developer Workflow', items: 'Git (branching, PRs, merge strategies), GitHub Organizations, Vercel CI/CD, CLI tooling, automated deployments' },
+  { cat: 'Communication', items: 'Systems thinking, user interviewing, technical writing, stakeholder mediation' },
 ]
 
 const fade = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 } }
@@ -158,12 +169,14 @@ export default function App() {
       <section className="hero">
         <motion.div className="hero-inner" {...fade}>
           <h1 className="hero-h1">
-            I build products with AI tools<br />and ship them to real users.
+            Building agentic systems since 2023,<br />before the category had a name.
           </h1>
           <p className="hero-p">
-            Product-minded builder based in Scottsdale, AZ. I use Claude Code every day to prototype, develop, and deploy production applications.
-            I care about developer workflows, user feedback loops, and what it actually feels like to use the tools I build.
-            Over the past year: 46+ repositories, 27 live apps, 4 Chrome extensions, and 8+ API integrations.
+            In April 2023, I designed and operated an autonomous AI sales agent named Sebastian on the Go High Level CRM,
+            six weeks before OpenAI shipped function calling, ten days before the platform shipped a competing native AI product.
+            Today I operate Brands By Status LLC (Create & Source) with 46+ repositories, 27 live production applications,
+            and 4 Chrome Manifest V3 extensions for real clients including a Fortune 500 (Nutanix), the International Dark-Sky
+            Discovery Center, and 7+ independent businesses.
           </p>
           <div className="hero-nums">
             <div className="num-block"><span className="num">46+</span><span className="num-label">Repositories</span></div>
@@ -190,16 +203,16 @@ export default function App() {
                 every role taught me the same thing: understand what people need, then build the system that delivers it.
               </p>
               <p>
-                Claude Code is my daily driver. I use it to go from idea to working prototype in hours,
+                I started building agentic AI systems in 2023, before function calling existed, before anyone was
+                calling them "agents." I designed an autonomous sales agent that ran 8,983 real conversations
+                using a hybrid architecture I invented out of necessity: deterministic workflows for predictable paths,
+                AI for ambiguous ones, with hallucination guardrails I had to design myself because no framework existed yet.
+              </p>
+              <p>
+                Today, Claude Code is my daily driver. I use it to go from idea to working prototype in hours,
                 not weeks. I have strong opinions about AI coding tools because I use them all day, every day,
                 to build real products for real people. I understand what works, what breaks, and what's missing
                 because I live inside these workflows.
-              </p>
-              <p>
-                I've built agentic AI systems that learn business context, SaaS platforms with 8 API integrations,
-                Chrome extensions with side panels and background workers, and e-commerce stores for clients
-                ranging from independent creators to Fortune 500 companies. I prototype fast, run user research
-                with real clients, and ship everything to production.
               </p>
               <p>
                 I think in products, not just features. I write specs, competitive analyses, and roadmaps before
@@ -325,7 +338,7 @@ export default function App() {
           <span className="sect-label">Featured Projects</span>
           <div className="feat-list">
             {featuredProjects.map((p, i) => (
-              <motion.div key={i} className="feat-card" {...fade} transition={{ delay: i * 0.04 }}>
+              <motion.div key={i} className={`feat-card${!p.github ? ' feat-card-full' : ''}`} {...fade} transition={{ delay: i * 0.04 }}>
                 <div className="feat-top">
                   <h3 className="feat-name">{p.name}</h3>
                   <span className="feat-type">{p.type}</span>
@@ -333,7 +346,11 @@ export default function App() {
                 <p className="feat-desc">{p.desc}</p>
                 <div className="feat-bottom">
                   <span className="feat-tech">{p.tech}</span>
-                  <a href={`https://github.com/${p.github}`} target="_blank" rel="noopener noreferrer" className="feat-link">View on GitHub</a>
+                  {p.github ? (
+                    <a href={`https://github.com/${p.github}`} target="_blank" rel="noopener noreferrer" className="feat-link">View on GitHub</a>
+                  ) : (
+                    <span className="feat-archived">Archived project</span>
+                  )}
                 </div>
               </motion.div>
             ))}
